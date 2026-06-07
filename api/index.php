@@ -48,7 +48,7 @@ function getNoteById($noteId, $mysqli) {
 	$query->bind_param("i", $noteId);
     $query->execute();
     $query_run = $query->get_result();
-	$note = mysqli_fetch_array($query_run);
+	$note = mysqli_fetch_assoc($query_run);
     $note['note'] = decrypt_note($note['note']);
 
 	return $note;
