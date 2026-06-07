@@ -36,3 +36,7 @@ I started with inspiration and core code from fundaofwebit.com's ["PHP Ajax CRUD
 
 ## Usage & Screenshots
 CRUD operations as expected, with main list sorted by last-updated descending. Note title is optional.
+
+![Main notes page](screenshots/1-main.jpg "Main notes page")
+
+![Database table](screenshots/2-db.jpg "Database table")
