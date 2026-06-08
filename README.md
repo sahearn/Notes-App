@@ -43,7 +43,7 @@ CRUD operations as expected, with main list sorted by last-updated descending. N
 ![Database table](screenshots/2-db.jpg "Database table")
 
 ## API
-To help with content retrieval, the API provides a simple GET method that returns a JSON payload. Standard REST API behavior:
+To help with content retrieval, the API provides a simple GET method that returns a JSON payload. I put this behind htaccess for Basic Authentication, since I went through the trouble of encrypting the content in the first place. Standard REST API behavior:
 
 `[url]/notes/api/index.php/notes` to pull all notes
 
