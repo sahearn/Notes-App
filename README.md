@@ -1,4 +1,4 @@
-# Notes-App
+# Notes App
 Personal notes app with API
 
 ## Background
