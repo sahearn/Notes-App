@@ -52,3 +52,6 @@ To help with content retrieval, the API provides a simple GET method that return
 ![API response all](screenshots/3-api-all.jpg "API response all")
 
 ![API response single](screenshots/4-api-single.jpg "API response single")
+
+## To-Dos
+- customize note order
