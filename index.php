@@ -17,9 +17,13 @@ if (isset($_POST['frm_auth'])) {
 
 // if no valid session, prompt for pw
 if (!$_SESSION['notesauthed']) {
+    echo '<!DOCTYPE html><html lang="en">';
+    echo '<head><title>Notes</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>';
+    echo '<body>';
     echo '<form action="" method="post">';
     echo '<input type="password" name="frm_auth"> <input type="submit" value="authenticate">';
     echo '</form>';
+    echo '</body></html>';
     exit;
 }
 
@@ -276,6 +280,19 @@ document.querySelectorAll('[data-target]').forEach(link => {
   });
 });
 
+// restore note selection after add/edit reload
+const restoreNote = sessionStorage.getItem('restoreNote');
+if (restoreNote) {
+    sessionStorage.removeItem('restoreNote');
+    let link;
+    if (restoreNote === 'first') {
+        link = document.querySelector('[data-target]');
+    } else {
+        link = document.querySelector('[data-target="value-' + restoreNote + '"]');
+    }
+    if (link) link.click();
+}
+
 // CSRF protection, passed with forms
 const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
@@ -310,6 +327,7 @@ $(document).on('submit', '#saveNote', function (e) {
                 alertify.success(res.message);
 
                 setTimeout(function() {
+                    sessionStorage.setItem('restoreNote', 'first');
                     location.reload();
                 }, 1500);
 
@@ -382,6 +400,7 @@ $(document).on('submit', '#updateNote', function (e) {
                 $('#updateNote')[0].reset();
 
                 setTimeout(function() {
+                    sessionStorage.setItem('restoreNote', $('#note_id').val());
                     location.reload();
                 }, 1500);
             }else if(res.status == 500) {
