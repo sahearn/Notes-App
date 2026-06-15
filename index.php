@@ -114,9 +114,11 @@ function parseMarkdownWithTasks($text) {
         font-size: 0.8em;
     }
     .editNoteBtn {
+        font-size: 1.1em;
         text-decoration: none;
     }
     .deleteNoteBtn {
+        font-size: 1.1em;
         color : #b00;
         text-decoration: none;
     }
@@ -244,7 +246,7 @@ function parseMarkdownWithTasks($text) {
                                     // custom function to render task lists (checkboxes)
                                     $renderText = parseMarkdownWithTasks($renderText);
                                     ?>
-                                    <div class="values" id="value-<?= $content['id'] ?>"><?= $renderText ?><br><br><a href="#" title="edit" class="editNoteBtn fa-regular fa-pen-to-square" data-value="<?= $content['id'] ?>"></a> &nbsp; <a href="#" title="delete" class="deleteNoteBtn fa-regular fa-trash-can" data-value="<?= $content['id'] ?>"></a> &nbsp; <span class="noteDates">created: <?= formatLocalTime($content['dt_created']) ?> &nbsp; updated: <?= formatLocalTime($content['dt_updated']) ?></span></div>
+                                    <div class="values" id="value-<?= $content['id'] ?>"><?= $renderText ?><br><br><a href="#" title="edit" class="editNoteBtn fa-regular fa-pen-to-square" data-value="<?= $content['id'] ?>"></a> &nbsp; <span class="noteDates">created: <?= formatLocalTime($content['dt_created']) ?> &nbsp; / &nbsp; updated: <?= formatLocalTime($content['dt_updated']) ?></span> &nbsp; <a href="#" title="delete" class="deleteNoteBtn fa-regular fa-trash-can" data-value="<?= $content['id'] ?>"></a></div>
                                     <?php
                                 }
                             }
@@ -291,6 +293,38 @@ if (restoreNote) {
         link = document.querySelector('[data-target="value-' + restoreNote + '"]');
     }
     if (link) link.click();
+}
+
+// auto-continue task list items on Enter
+document.getElementById('add_note').addEventListener('keydown', handleTaskListEnter);
+document.getElementById('edit_note').addEventListener('keydown', handleTaskListEnter);
+
+function handleTaskListEnter(e) {
+    if (e.key !== 'Enter') return;
+
+    const textarea = e.target;
+    const pos = textarea.selectionStart;
+    const text = textarea.value;
+
+    // find the start of the current line
+    const lineStart = text.lastIndexOf('\n', pos - 1) + 1;
+    const currentLine = text.substring(lineStart, pos);
+
+    // check if current line is a task list item
+    if (!/^- \[[ x]\] /.test(currentLine)) return;
+
+    // if the current line is an empty task item, remove it and stop
+    if (/^- \[[ x]\] $/.test(currentLine)) {
+        e.preventDefault();
+        textarea.value = text.substring(0, lineStart) + text.substring(pos);
+        textarea.selectionStart = textarea.selectionEnd = lineStart;
+        return;
+    }
+
+    e.preventDefault();
+    const insertion = '\n- [ ] ';
+    textarea.value = text.substring(0, pos) + insertion + text.substring(pos);
+    textarea.selectionStart = textarea.selectionEnd = pos + insertion.length;
 }
 
 // CSRF protection, passed with forms
