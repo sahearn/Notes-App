@@ -64,12 +64,13 @@ function parseMarkdownWithTasks($text) {
     <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <title>Notes</title>
 
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"> <? // https://alertifyjs.com/guide.html ?>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> <? // https://cdnjs.com/libraries/font-awesome ?>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"> <? // https://cdnjs.com/libraries/font-awesome ?>
 
     <style>
     table {
@@ -240,11 +241,8 @@ function parseMarkdownWithTasks($text) {
                                         </a>
                                     </div>
                                     <?php
-                                    // decrypt the note, remove bad html, render any markdown
-                                    $renderText = $Parsedown->line(htmlspecialchars(decrypt_note($content['note']), ENT_QUOTES, 'UTF-8'));
-
-                                    // custom function to render task lists (checkboxes)
-                                    $renderText = parseMarkdownWithTasks($renderText);
+                                    // decrypt the note, remove bad html, render any markdown, add custom parsing of task lists (checkboxes)
+                                    $renderText = parseMarkdownWithTasks(decrypt_note($content['note']));
                                     ?>
                                     <div class="values" id="value-<?= $content['id'] ?>"><?= $renderText ?><br><br><a href="#" title="edit" class="editNoteBtn fa-regular fa-pen-to-square" data-value="<?= $content['id'] ?>"></a> &nbsp; <span class="noteDates">created: <?= formatLocalTime($content['dt_created']) ?> &nbsp; / &nbsp; updated: <?= formatLocalTime($content['dt_updated']) ?></span> &nbsp; <a href="#" title="delete" class="deleteNoteBtn fa-regular fa-trash-can" data-value="<?= $content['id'] ?>"></a></div>
                                     <?php
@@ -265,10 +263,10 @@ function parseMarkdownWithTasks($text) {
 </div>
 <br>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
 
 <script>
 // data-target nav/content display
