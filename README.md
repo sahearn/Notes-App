@@ -2,7 +2,7 @@
 Personal notes app with API
 
 ## Background
-A fairly basic personal notes app with Markdown support and an additional API for example usage. (Currently only with GET method implemented.) I originally made it for myself, so is a single-user app. 
+A fairly basic personal web-based notes app with Markdown support and a REST API for expanded usage. I originally made it for myself, so it is a single-user app. 
 
 ## What You'll Need
 - a web host
