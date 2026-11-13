@@ -36,6 +36,7 @@ switch ($method) {
             if (trim($title) === '') { $title = null; }     // if title is sent but empty, null
             $note = $inputData['note'] ?? null;
 
+            // title is nullable, note content is not
             if ($note === null || trim($note) === '') {
                 http_response_code(422);
                 echo json_encode(["status" => 422,"error" => "Validation Error","message" => "The note content is required and cannot be empty."]);
@@ -89,6 +90,7 @@ switch ($method) {
             if (trim($title) === '') { $title = null; }     // if title is sent but empty, null
             $note = $inputData['note'] ?? null;
 
+            // title is nullable, note content is not
             if ($note === null || trim($note) === '') {
                 http_response_code(422);
                 echo json_encode(["status" => 422,"error" => "Validation Error","message" => "The note content is required and cannot be empty."]);
