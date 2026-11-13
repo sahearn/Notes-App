@@ -45,13 +45,13 @@ CRUD operations as expected, with main list sorted by last-updated descending. N
 ## API
 To help with content maintenance, the API provides GET, POST, and PUT methods. I put this behind htaccess for Basic Authentication, since I went through the trouble of encrypting the content in the first place. Standard REST API behavior:
 
-GET `[url]/notes/api/index.php/notes` to pull all notes
+GET `[url]/api/index.php/notes` to pull all notes
 
-GET `[url]/notes/api/index.php/notes/[id]` to pull a single note
+GET `[url]/api/index.php/notes/[id]` to pull a single note
 
-POST `[url]/notes/api/index.php/notes` to add a new note
+POST `[url]/api/index.php/notes` to add a new note
 
-PUT `[url]/notes/api/index.php/notes/[id]` to update an existing note
+PUT `[url]/api/index.php/notes/[id]` to update an existing note
 
 ![API response all](screenshots/3-api-all.jpg "API response all")
 
