@@ -43,11 +43,15 @@ CRUD operations as expected, with main list sorted by last-updated descending. N
 ![Database table](screenshots/2-db.jpg "Database table")
 
 ## API
-To help with content retrieval, the API provides a simple GET method that returns a JSON payload. I put this behind htaccess for Basic Authentication, since I went through the trouble of encrypting the content in the first place. Standard REST API behavior:
+To help with content maintenance, the API provides GET, POST, and PUT methods. I put this behind htaccess for Basic Authentication, since I went through the trouble of encrypting the content in the first place. Standard REST API behavior:
 
-`[url]/notes/api/index.php/notes` to pull all notes
+GET `[url]/notes/api/index.php/notes` to pull all notes
 
-`[url]/notes/api/index.php/notes/[id]` to pull a single note
+GET `[url]/notes/api/index.php/notes/[id]` to pull a single note
+
+POST `[url]/notes/api/index.php/notes` to add a new note
+
+PUT `[url]/notes/api/index.php/notes/[id]` to update an existing note
 
 ![API response all](screenshots/3-api-all.jpg "API response all")
 
