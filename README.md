@@ -16,7 +16,7 @@ I started with inspiration and core code from fundaofwebit.com's ["PHP Ajax CRUD
 1. Create a database table "notes" with 5 columns:
    - id (int, auto-increment)
    - title (text, nullable)
-   - note (text)
+   - note (mediumtext)
    - dt_created (datetime)
    - dt_updated (datetime)
 2. Grab relevant source files.
